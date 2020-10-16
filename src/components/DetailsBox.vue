@@ -45,9 +45,22 @@ section {
     min-height: 6em;
 }
 
+section > div {
+    padding: .5em;
+}
+
+section > div:not(:last-child) {
+    border-right: 1px solid hsl(0, 0%, 59%);
+}
+h1 {
+    color: hsl(0, 0%, 17%);
+}
+
+
 h2 {
     font-size: 1rem;
     color: hsl(0, 0%, 59%);
     text-transform: uppercase;
+    margin-bottom: .5em;
 }
 </style>
