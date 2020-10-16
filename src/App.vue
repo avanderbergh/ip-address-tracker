@@ -56,7 +56,7 @@ body {
 }
 
 header {
-  background: url(/pattern-bg.png);
+  background: center / cover no-repeat url(/pattern-bg.png);
   text-align: center;
   color: #fff;
   padding: 3em;
