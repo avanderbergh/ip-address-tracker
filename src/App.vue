@@ -1,30 +1,43 @@
 <template>
   <header>
     <h1>IP Address Tracker</h1>
-    <form>
+    <form @submit.prevent="handleSubmit">
       <input
         type="text"
-        v-model="ip"
-        @keydown="handleInputChanged"
+        v-model="domain"
         placeholder="Search for any IP address or domain"
       />
       <input type="submit" value=">" />
     </form>
   </header>
-  <h1>{{ ip }}</h1>
+  <main>
+    <DetailsBox v-bind:details="result" />
+    <MapView v-bind:loc="result.location" />
+  </main>
 </template>
 
 <script>
 import { ref } from "vue";
+import { ipifyKey } from "../.keys";
+import DetailsBox from "./components/DetailsBox";
+import MapView from "./components/MapView";
 export default {
   name: "App",
+  components: {
+    DetailsBox,
+    MapView,
+  },
   setup() {
-    const ip = ref("");
+    const domain = ref("");
+    const result = ref({});
 
-    function handleInputChanged(e) {
-      if (!(!isNaN(Number(e.key)) || e.keyCode === 190)) e.preventDefault();
+    async function handleSubmit() {
+      const response = await fetch(
+        `https://geo.ipify.org/api/v1?apiKey=${ipifyKey}&domain=${domain.value}`
+      );
+      result.value = await response.json();
     }
-    return { ip, handleInputChanged };
+    return { domain, handleSubmit, result };
   },
 };
 </script>
@@ -47,11 +60,19 @@ header {
   text-align: center;
   color: #fff;
   padding: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main {
+  position: relative;
 }
 
 form {
   position: relative;
-  margin: 1em;
+  margin: 2em 0 3em 0;
+  width: 24em;
 }
 
 input {
