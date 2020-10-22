@@ -2,12 +2,11 @@
   <header>
     <h1>IP Address Tracker</h1>
     <form @submit.prevent="handleSubmit">
-      <input
-        type="text"
-        v-model="domain"
+      <SearchBox
+        v-model:value="domain"
         placeholder="Search for any IP address or domain"
+        button-text=">"
       />
-      <input type="submit" value=">" />
     </form>
   </header>
   <main>
@@ -21,11 +20,14 @@ import { ref } from "vue";
 import { ipifyKey } from "../.keys";
 import DetailsBox from "./components/DetailsBox";
 import MapView from "./components/MapView";
+import SearchBox from "./components/SearchBox";
+
 export default {
   name: "App",
   components: {
     DetailsBox,
     MapView,
+    SearchBox,
   },
   setup() {
     const domain = ref("");
@@ -54,7 +56,8 @@ export default {
 body {
   font-family: "Rubik", sans-serif;
 }
-
+</style>
+<style scoped>
 header {
   background: center / cover no-repeat url(/pattern-bg.png);
   text-align: center;
@@ -72,28 +75,6 @@ main {
 form {
   position: relative;
   margin: 2em 0 3em 0;
-  width: 24em;
-}
-
-input {
-  border-radius: 0.5em;
-  border: none;
-  padding: 1em;
-}
-
-input[type="submit"] {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  color: #fff;
-  background: #000;
-  border-radius: 0 0.5em 0.5em 0;
-  cursor: pointer;
-}
-
-input[type="text"] {
-  width: 100%;
-  font-size: 18px;
+  width: min(80vw, 39em);
 }
 </style>
