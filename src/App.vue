@@ -1,7 +1,7 @@
 <template>
-  <header>
-    <h1>IP Address Tracker</h1>
-    <form @submit.prevent="handleSubmit">
+  <header class="text-white">
+    <h1 class="text-4xl font-bold">IP Address Tracker</h1>
+    <form @submit.prevent="handleSubmit" class="relative m-4 mb-8 w-11/12 md:w-6/12">
       <SearchBox
         v-model:value="domain"
         placeholder="Search for any IP address or domain"
@@ -9,7 +9,7 @@
       />
     </form>
   </header>
-  <main>
+  <main class="relative">
     <DetailsBox v-bind:details="result" />
     <MapView v-bind:loc="result.location" />
   </main>
@@ -46,35 +46,14 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Rubik", sans-serif;
-}
 </style>
 <style scoped>
 header {
   background: center / cover no-repeat url(/pattern-bg.png);
   text-align: center;
-  color: #fff;
   padding: 3em;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-main {
-  position: relative;
-}
-
-form {
-  position: relative;
-  margin: 2em 0 3em 0;
-  width: min(80vw, 39em);
 }
 </style>
